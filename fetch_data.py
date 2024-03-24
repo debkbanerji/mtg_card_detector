@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import re
 from urllib import request, error
+from pathlib import Path
 
 from config import Config
 
@@ -24,8 +25,10 @@ def fetch_all_cards_text(url='https://api.scryfall.com/cards/search?q=layout:nor
     has_more = True
     cards = []
     # get cards dataset as a json from the query
+    print(has_more)
     while has_more:
         res_file_dir, http_message = request.urlretrieve(url)
+        print(res_file_dir, http_message)
         with open(res_file_dir, 'r') as res_file:
             res_json = json.loads(res_file.read())
             cards += res_json['data']
@@ -46,6 +49,7 @@ def fetch_all_cards_text(url='https://api.scryfall.com/cards/search?q=layout:nor
 
 
 def load_all_cards_text(csv_name):
+    print('hello from csv_name load_all_cards_text')
     df = pd.read_csv(csv_name, sep=';')   # Comma seperator doesn't work, since some columns are saved as a dict
     return df
 
@@ -126,6 +130,8 @@ def fetch_card_image(row, out_dir=None, size='png'):
 
 
 def main():
+    print('hello from fetch_data main')
+    Path(Config.data_dir + '/csv').mkdir(parents=True, exist_ok=True)
     # Query card data by each set, then merge them together
     for set_name in Config.all_set_list:
         csv_name = '%s/csv/%s.csv' % (Config.data_dir, set_name)

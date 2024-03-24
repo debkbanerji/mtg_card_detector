@@ -1,7 +1,13 @@
 # Fork Specific Notes - Mar 2023
 Attempting to run this code - needed to make some requirements.txt changes, and update the openCV contour command.
 
-Example command:
+Example command(s):
+
+
+Needed to run fetch_data first if pck file was not found:
+```
+python fetch_data.py
+```
 
 ```
 python opencv_dnn.py --display --in ./test_file/test17.jpg

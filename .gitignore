@@ -30,3 +30,5 @@ CMakeLists.txt
 
 .idea/
 __pycache__/
+
+mtg_card_detector_data

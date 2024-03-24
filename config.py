@@ -23,5 +23,6 @@ class Config:
     all_set_list = set_2003_list + set_2015_list + set_box_list + set_sup_list
 
     card_mask_path = os.path.abspath('data/mask.png')
-    data_dir = os.path.abspath('/media/win10/data')
+    # data_dir = os.path.abspath('/media/win10/data')
+    data_dir = os.path.abspath('./mtg_card_detector_data')
     darknet_dir = os.path.abspath('.')
