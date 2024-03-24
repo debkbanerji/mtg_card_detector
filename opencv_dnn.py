@@ -19,7 +19,7 @@ As of the current version, the YOLO network has been removed from this code duri
 It was found out that YOLO was adding too much processing delay, and the benefits from using it couldn't justify
 such heavy cost.
 If you're interested to see the implementation using YOLO, please check out the previous commit:
-https://github.com/hj3yoo/mtg_card_detector/tree/dea64611730c84a59c711c61f7f80948f82bcd31 
+https://github.com/hj3yoo/mtg_card_detector/tree/dea64611730c84a59c711c61f7f80948f82bcd31
 """
 
 
@@ -35,7 +35,7 @@ def calc_image_hashes(card_pool, save_to=None, hash_size=None):
         hash_size = [16, 32]
     elif isinstance(hash_size, int):
         hash_size = [hash_size]
-    
+
     # Since some double-faced cards may result in two different cards, create a new dataframe to store the result
     new_pool = pd.DataFrame(columns=list(card_pool.columns.values))
     for hs in hash_size:
@@ -217,7 +217,7 @@ def find_card(img, thresh_c=5, kernel_size=(3, 3), size_thresh=10000):
     img_erode = cv2.erode(img_dilate, kernel, iterations=1)
 
     # Find the contour
-    _, cnts, hier = cv2.findContours(img_erode, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    cnts, hier = cv2.findContours(img_erode, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     if len(cnts) == 0:
         #print('no contours')
         return []
@@ -538,7 +538,7 @@ if __name__ == '__main__':
     parser.add_argument('-dsp', '--display', dest='display', help='Display the result', action='store_true',
                         default=False)
     parser.add_argument('-dbg', '--debug', dest='debug', help='Enable debug mode', action='store_true', default=False)
-    parser.add_argument('-gph', '--show_graph', dest='show_graph', help='Display the graph for video output', 
+    parser.add_argument('-gph', '--show_graph', dest='show_graph', help='Display the graph for video output',
                         action='store_true', default=False)
     args = parser.parse_args()
     if not args.display and args.out_path is None:

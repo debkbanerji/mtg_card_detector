@@ -1,3 +1,12 @@
+# Fork Specific Notes - Mar 2023
+Attempting to run this code - needed to make some requirements.txt changes, and update the openCV contour command.
+
+Example command:
+
+```
+python opencv_dnn.py --display --in ./test_file/test17.jpg
+```
+
 # Magic: The Gathering Card Detector
 
 MTG Card Detector is a real-time application that can identify Magic: The Gathering playing cards from either an image or a video. It utilizes various computer vision techniques to process the input image, and uses [perceptual hashing](https://jenssegers.com/61/perceptual-image-hashes) to identify the detected image of the cards with the matching cards from the database of MTG cards. Refer to [opencv_dnn.py](https://github.com/hj3yoo/mtg_card_detector/blob/master/opencv_dnn.py) for more detailed implementation.
@@ -12,7 +21,7 @@ You can run the demo using the following:
 python3 opencv_dnn.py [-i path/to/input/file -o path/to/output/directory -hs (one of 16/32)  -dsp -dbg -gph]
 ```
 
-Initially, the project used a powerful neural network named ['You Only Look Once (YOLO)'](https://arxiv.org/pdf/1506.02640v5.pdf) to detect individual cards, but it has been removed as of Oct 12th, 2018 [(note)](https://github.com/hj3yoo/mtg_card_detector#oct-12th-2018) in favour of classical CV techniques. 
+Initially, the project used a powerful neural network named ['You Only Look Once (YOLO)'](https://arxiv.org/pdf/1506.02640v5.pdf) to detect individual cards, but it has been removed as of Oct 12th, 2018 [(note)](https://github.com/hj3yoo/mtg_card_detector#oct-12th-2018) in favour of classical CV techniques.
 
 **Demo:**
 
@@ -33,18 +42,18 @@ You can still find the files used to train them:
 
 Uploading all the progresses on the model training for the last few days.
 
-First batch of model training is completed, where I used ~40,000 generated images of MTG cards laid out in one of the pre-defined pattern. 
+First batch of model training is completed, where I used ~40,000 generated images of MTG cards laid out in one of the pre-defined pattern.
 
 <img src="https://github.com/hj3yoo/darknet/blob/master/figures/0_training_set_example_1.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/0_training_set_example_2.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/0_training_set_example_3.jpg" width="360">
 
-After 5000 training epochs, the model got 88% validation accuracy on the generated test set. 
+After 5000 training epochs, the model got 88% validation accuracy on the generated test set.
 
 <img src="https://github.com/hj3yoo/darknet/blob/master/figures/0_detection_result_1.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/0_detection_result_2.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/0_detection_result_3.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/0_detection_result_4.jpg" width="360">
 
 However, there are some blind spots on the model, notably:
 
 - Fails to spot some of the obscured cards, where only a fraction of them are shown.
-- Fairly fragile against any glaring or light variations. 
+- Fairly fragile against any glaring or light variations.
 - Cannot detect any skewed cards.
 
 Example of bad detections:
@@ -57,7 +66,7 @@ The second and third problems should easily be solved by further augmenting the 
 
 Added several image augmentation techniques to apply to the training set: noise, dropout, light variation, and glaring:
 
-<img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_augmented_set_example_1.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_augmented_set_example_2.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_augmented_set_example_3.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_augmented_set_example_4.jpg" width="360"> 
+<img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_augmented_set_example_1.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_augmented_set_example_2.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_augmented_set_example_3.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_augmented_set_example_4.jpg" width="360">
 
 Currently trying to generate enough images to start model training. Hopefully this helps.
 
@@ -69,7 +78,7 @@ I've ran a quick training with tiny_yolo configuration with new training data, a
 
 <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_detection_result_1.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_decision_result_2.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_decision_result_3.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_decision_result_4.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_decision_result_5.jpg" width="360"> <img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_decision_result_6.jpg" width="360">
 
-<img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_learning_curve.jpg" width="640"> 
+<img src="https://github.com/hj3yoo/darknet/blob/master/figures/1_learning_curve.jpg" width="640">
 
 The video demo can be found here: https://www.youtube.com/watch?v=kFE_k-mWo2A&feature=youtu.be
 
@@ -78,16 +87,16 @@ The video demo can be found here: https://www.youtube.com/watch?v=kFE_k-mWo2A&fe
 
 I've been training a new model with a full YOLOv3 configuration (previous one used Tiny YOLOv3), and it's been taking a lot more resources:
 
-<img src="https://github.com/hj3yoo/darknet/blob/master/figures/2_learning_curve.jpg" width="640"> 
+<img src="https://github.com/hj3yoo/darknet/blob/master/figures/2_learning_curve.jpg" width="640">
 
 The author of darknet did mention that full network will take significantly more training effort, so I'll just have to wait. At this rate, it should reach 50k epoch in about a week :/
 
 
 ## Sept 13th, 2018
 
-The training for full YOLOv3 model has turned sour - the loss saturated around 0.45, and didn't seem like it would improve in any reasonable amount of time. 
+The training for full YOLOv3 model has turned sour - the loss saturated around 0.45, and didn't seem like it would improve in any reasonable amount of time.
 
-<img src="https://github.com/hj3yoo/darknet/blob/master/figures/3_learning_curve.jpg" width="640"> 
+<img src="https://github.com/hj3yoo/darknet/blob/master/figures/3_learning_curve.jpg" width="640">
 
 As expected, the performance of the model with 0.45 loss was fairly bad. Not to mention that it's quite slower, too. I've decided to continue with tiny YOLOv3 weights. I tried to train it further, but it was already saturated, and was the best it could get.
 
@@ -205,8 +214,8 @@ Furthermore, turns out that hash size of 16 is sufficient enough to distinguish 
 
 The other bottleneck is a something unfortunate. Turns out feeding the image through YOLO network consumes a constant 50 - 60ms per frame. Remember the processing time of (65+50)ms above? Yeah, that's where the 65ms is coming from.
 
-As hilarious and ironic it is, I would have to remove the network entirely to speed up the program... 
-**(((Facepalm into another dimension)))** 
+As hilarious and ironic it is, I would have to remove the network entirely to speed up the program...
+**(((Facepalm into another dimension)))**
 The program still works by replacing neural net with contour detection
 
 ## Oct 13th, 2018

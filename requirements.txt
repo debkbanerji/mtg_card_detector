@@ -1,13 +1,14 @@
-ast
-cv2==3.4.2
+# ast - included in python now?
+opencv-python
 imgaug==0.2.6
 imutils==0.5.1
-json==2.0.9
+# json - included in python now?
 matplotlib==2.2.2
 numpy==1.15.2
 pandas==0.23.0
-pickle
-PIL==5.1.0
+# pickle - included in python now?
+# PIL==5.1.0
+pillow # replaces PIL?
 shapely==1.6.4
-urllib
-
+# urllib - included in python now?
+imagehash
